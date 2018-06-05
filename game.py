@@ -26,7 +26,7 @@ class Mapa:
             pygame.image.load('resources/floor2.png'), pygame.image.load('resources/floor3.png'),]
         self.imgRect = [self.img[0].get_rect(),self.img[1].get_rect(),self.img[2].get_rect(),self.img[3].get_rect()]
 
-    def testColision(self,X,Y):
+    def testColision(self,X,Y): #Para testear si colisiona el jugador con alguna casilla tipo paredes
         X = int(X/TILE_W)
         Y = int(Y/TILE_H)
         if self.mapa[Y][X] == 1:
