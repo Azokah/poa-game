@@ -2,12 +2,26 @@ import sys, pygame, numpy #Para el sistema
 from random import randint #Para generar numeros random
 import json #Para cargar los objetos
 
-#Constantes para PYGAME
+#Constantes
 SIZE = SCREEN_W, SCREEN_H = 1024, 768
 SPEED = [2, 2]
 FONT_SIZE = 30
 BACKGROUND_COLOR = 0, 0, 0
-#Constantes del JUEGO
+MUSIC_PATH = 'resources/music.ogg'
+SOUND_COIN_PATH = 'resources/coin.ogg'
+SOUND_HURT_PATH = 'resources/hurt.ogg'
+MAP1_PATH = 'resources/level1.txt'
+OBJECTS1_PATH = 'resources/level1-objects.json'
+TILE_FLOOR1_PATH = 'resources/floor1.png'
+TILE_WALL_PATH = 'resources/wall.png'
+TILE_FLOOR2_PATH = 'resources/floor2.png'
+TILE_FLOOR3_PATH = 'resources/floor3.png'
+HERO_SURFACE_RUNNING_PATH = 'resources/sheet_hero_walk.png'
+HERO_RUNNING_FRAMES = 3
+HERO_SURFACE_IDLE_PATH = 'resources/sheet_hero_idle.png'
+HERO_IDLE_FRAMES = 8
+HERO_SURFACE_HURT_PATH = 'resources/sheet_hero_hurt.png'
+HERO_HURT_FRAMES = 4
 TILE_W = 64
 TILE_H = 64
 TILE_WALL = 1
@@ -24,18 +38,6 @@ HERO_SIZE_H = 32
 MAX_SCORE = 1000 
 SCORE_TICK = 250 #Milisegundos en los que tarda en bajar 1 punto de score
 SCORE_TEXT_OFFSET = 16
-MAP1_PATH = 'resources/level1.txt'
-OBJECTS1_PATH = 'resources/level1-objects.json'
-TILE_FLOOR1_PATH = 'resources/floor1.png'
-TILE_WALL_PATH = 'resources/wall.png'
-TILE_FLOOR2_PATH = 'resources/floor2.png'
-TILE_FLOOR3_PATH = 'resources/floor3.png'
-HERO_SURFACE_RUNNING_PATH = 'resources/sheet_hero_walk.png'
-HERO_RUNNING_FRAMES = 3
-HERO_SURFACE_IDLE_PATH = 'resources/sheet_hero_idle.png'
-HERO_IDLE_FRAMES = 8
-HERO_SURFACE_HURT_PATH = 'resources/sheet_hero_hurt.png'
-HERO_HURT_FRAMES = 4
 HURT_ANIMATION_TICKRATE = 1000
 #Enum de estados de heroe
 HERO_IDLE = 0
@@ -50,6 +52,8 @@ ANIMATION_TICKRATE = 150
 #Iniciamos modulos de pygame
 pygame.init()
 pygame.font.init()
+pygame.mixer.music.load(MUSIC_PATH)
+pygame.mixer.music.play(-1)
 
 #Creamos el mapa
 class Mapa:
@@ -252,11 +256,13 @@ class Game:
         self.font = pygame.font.SysFont(FONT_TYPE, FONT_SIZE)
         self.mapa = Mapa() #Inicializamos mapa
         self.heroe = Heroe() #Instanciamos al heroe
-        self.finish = False
-        self.score = MAX_SCORE
-        self.scoreTick = pygame.time.get_ticks()
-        self.scoreSurface = self.font.render("Score: "+str(self.score), False, (255, 255, 255))
-        self.impotJsonObjects(OBJECTS1_PATH)
+        self.finish = False #Variable que indica si el juego no ha terminado
+        self.score = MAX_SCORE #Puntaje
+        self.scoreTick = pygame.time.get_ticks() #Reloj del puntaje
+        self.scoreSurface = self.font.render("Score: "+str(self.score), False, (255, 255, 255)) #Surface del texto para graficar puntaje
+        self.impotJsonObjects(OBJECTS1_PATH) #Cargamos los objetos del mapa
+        self.soundHurt = pygame.mixer.Sound(SOUND_HURT_PATH) #Cargamos sonido  hurt
+        self.soundCoin = pygame.mixer.Sound(SOUND_COIN_PATH) #Cargamos sonido Coin
 
     
     def checkIfPlayerDied(self):#Metodo que consulta si el jugador murio
@@ -273,6 +279,9 @@ class Game:
                 self.score += o.scoreAdd
                 if o.scoreAdd < 0:
                     self.heroe.damage()
+                    self.soundHurt.play()
+                else:
+                    self.soundCoin.play()
                 self.objects.remove(o)
 
     def checkWinCondition(self):#Metodo que consulta si el jugador se paró en la ultima casilla
