@@ -38,14 +38,16 @@ class Game:
         self.scoreTick = pygame.time.get_ticks()  # Reloj del puntaje
         self.scoreSurface = self.font.render("Score: " + str(self.score), False,
                                              (255, 255, 255))  # Surface del texto para graficar puntaje
-        self.impotJsonObjects(C.OBJECTS1_PATH)  # Cargamos los objetos del mapa
+        self.impotJsonObjects(C.OBJECT_LIST[self.mapa.actualMap])  # Cargamos los objetos del mapa
         self.soundHurt = pygame.mixer.Sound(C.SOUND_HURT_PATH)  # Cargamos sonido  hurt
         self.soundCoin = pygame.mixer.Sound(C.SOUND_COIN_PATH)  # Cargamos sonido Coin
+
 
     def checkIfPlayerDied(self):  # Metodo que consulta si el jugador murio
         if self.heroe.hp <= 0:
             self.finish = True
             print("Has muerto!. Score: " + str(self.score))
+            #Tirar losing surface
 
     def checkPickObjects(self):  # Metodo que consulta si el jugador colisiono con algun objeto
         y = int(self.heroe.imgRect.center[1] / C.TILE_H)
@@ -65,8 +67,12 @@ class Game:
         y = int(self.heroe.imgRect.center[1] / C.TILE_H)
         x = int(self.heroe.imgRect.center[0] / C.TILE_W)
         if self.mapa.mapa[y][x] == C.TILE_EXIT:
-            self.finish = True
-            print("Felicidades, ganaste!. Score: " + str(self.score))
+            if self.mapa.nextMap() == False: #Si no hay mas mapas
+                self.finish = True #Terminamos
+                print("Felicidades, ganaste!. Score: " + str(self.score))
+            else:
+                self.objects.clear() #Eliminamos si quedaron objetos que no agarro el usuario
+                self.impotJsonObjects(C.OBJECT_LIST[self.mapa.actualMap]) #Cargamos nuevos objetos
 
     def input(self):  # Input del juego
         for event in pygame.event.get():
@@ -95,8 +101,8 @@ class Game:
     def draw(self):
         self.screen.fill(C.BACKGROUND_COLOR)  # Pintamos pantalla de negro
         # Graficamos todo el mapa
-        for w in range(0, 12):
-            for j in range(0, 12):
+        for w in range(0, C.MAP_W):
+            for j in range(0, C.MAP_H):
                 self.mapa.imgRect[self.mapa.mapa[j][w]].x = w * C.TILE_W
                 self.mapa.imgRect[self.mapa.mapa[j][w]].y = j * C.TILE_H
                 self.screen.blit(self.mapa.img[self.mapa.mapa[j][w]], self.mapa.imgRect[self.mapa.mapa[j][w]])

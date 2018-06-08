@@ -1,0 +1,26 @@
+[
+    {
+        "x":2,
+        "y":10,
+        "scoreAdd":1000,
+        "type":"gold"
+    },
+    {
+        "x":10,
+        "y":10,
+        "scoreAdd":1000,
+        "type":"gold"
+    },
+    {
+        "x":10,
+        "y":3,
+        "scoreAdd":1000,
+        "type":"gold"
+    },
+    {
+        "x":6,
+        "y":5,
+        "scoreAdd":-2000,
+        "type":"trap"
+    }
+]

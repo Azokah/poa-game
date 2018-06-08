@@ -53,3 +53,5 @@ FONT_TYPE = 'Arial'
 OBJECT_GOLD_PATH = 'resources/soupdungeon_2x/gold_pile_16_2x.png'
 OBJECT_TRAP_PATH = 'resources/soupdungeon_2x/crystal_wall_lightred_2x.png'
 ANIMATION_TICKRATE = 150
+LOSING_SURFACE = 'resources/losingScreen.png'
+WINNING_SURFACE = 'resources/WinningScreen.png'
