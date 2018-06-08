@@ -1,0 +1,45 @@
+#Constantes
+SIZE = SCREEN_W, SCREEN_H = 1024, 768
+SPEED = [2, 2]
+FONT_SIZE = 30
+BACKGROUND_COLOR = 0, 0, 0
+MUSIC_PATH = 'project/resources/music.ogg'
+SOUND_COIN_PATH = 'project/resources/coin.ogg'
+SOUND_HURT_PATH = 'project/resources/hurt.ogg'
+MAP1_PATH = 'project/resources/level1.txt'
+OBJECTS1_PATH = 'project/resources/level1-objects.json'
+TILE_FLOOR1_PATH = 'project/resources/floor1.png'
+TILE_WALL_PATH = 'project/resources/wall.png'
+TILE_FLOOR2_PATH = 'project/resources/floor2.png'
+TILE_FLOOR3_PATH = 'project/resources/floor3.png'
+HERO_SURFACE_RUNNING_PATH = 'project/resources/sheet_hero_walk.png'
+HERO_RUNNING_FRAMES = 3
+HERO_SURFACE_IDLE_PATH = 'project/resources/sheet_hero_idle.png'
+HERO_IDLE_FRAMES = 8
+HERO_SURFACE_HURT_PATH = 'project/resources/sheet_hero_hurt.png'
+HERO_HURT_FRAMES = 4
+TILE_W = 64
+TILE_H = 64
+TILE_WALL = 1
+TILE_FLOOR = 0
+TILE_ENTRY = 2
+TILE_EXIT = 3
+MAP_W = 12
+MAP_H = 12
+HERO_HP_MAX = 3
+HERO_SPEED = 4
+HERO_COLISION_OFFSET = 12
+HERO_SIZE_W = 32
+HERO_SIZE_H = 32
+MAX_SCORE = 1000
+SCORE_TICK = 250 #Milisegundos en los que tarda en bajar 1 punto de score
+SCORE_TEXT_OFFSET = 16
+HURT_ANIMATION_TICKRATE = 1000
+#Enum de estados de heroe
+HERO_IDLE = 0
+HERO_RUN = 1
+HERO_HURT = 2
+FONT_TYPE = 'Arial'
+OBJECT_GOLD_PATH = 'project/resources/soupdungeon_2x/gold_pile_16_2x.png'
+OBJECT_TRAP_PATH = 'project/resources/soupdungeon_2x/crystal_wall_lightred_2x.png'
+ANIMATION_TICKRATE = 150
