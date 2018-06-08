@@ -2,3 +2,8 @@ env/
 .vscode/
 .idea/
 venv/
+code/__pycache__
+code/characters/__pycache__
+code/config/__pycache__
+code/map/__pycache__
+code/objects/__pycache__

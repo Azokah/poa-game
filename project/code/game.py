@@ -2,12 +2,12 @@ import json  # Para cargar los objetos
 import sys
 
 import pygame  # Para el sistema
-from project.code.config import constants as C
-from project.code.map.map import Mapa
-from project.code.objects.gold import Gold
-from project.code.objects.trap import Trap
+from config import constants as C
+from map.map import Mapa
+from objects.gold import Gold
+from objects.trap import Trap
 
-from project.code.characters.hero import Heroe
+from characters.hero import Heroe
 
 
 class Game:

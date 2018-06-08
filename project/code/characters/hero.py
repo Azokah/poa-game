@@ -1,7 +1,7 @@
 import pygame  # Para el sistema
 
-from project.code.characters.animator import Animator
-from project.code.config import constants as C
+from characters.animator import Animator
+from config import constants as C
 
 
 # Creamos al heroe

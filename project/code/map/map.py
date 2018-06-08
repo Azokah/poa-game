@@ -1,7 +1,7 @@
 import numpy  # Para el sistema
 import pygame
 
-from project.code.config import constants as C
+from config import constants as C
 
 
 # Creamos el mapa

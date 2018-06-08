@@ -1,7 +1,7 @@
 import pygame  # Para el sistema
-from project.code.objects.object import Object
+from objects.object import Object
 
-from project.code.config import constants as C
+from config import constants as C
 
 
 class Gold(Object):

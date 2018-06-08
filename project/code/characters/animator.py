@@ -1,6 +1,6 @@
 import pygame  # Para el sistema
 
-from project.code.config import constants as C
+from config import constants as C
 
 
 # Creamos un animador para efectos de animacion

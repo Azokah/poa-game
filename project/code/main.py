@@ -1,7 +1,7 @@
 import pygame
 
-from project.code.config import constants as C
-from project.code.game import Game
+from config import constants as C
+from game import Game
 
 #Iniciamos modulos de pygame
 pygame.init()
