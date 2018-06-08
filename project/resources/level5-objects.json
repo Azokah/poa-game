@@ -1,26 +1,38 @@
 [
     {
+        "x":1,
+        "y":1,
+        "scoreAdd":100000,
+        "type":"gold"
+    },
+    {
         "x":2,
-        "y":10,
-        "scoreAdd":1000,
-        "type":"gold"
+        "y":1,
+        "scoreAdd":-1000,
+        "type":"trap"
     },
     {
-        "x":10,
-        "y":10,
-        "scoreAdd":1000,
-        "type":"gold"
+        "x":1,
+        "y":2,
+        "scoreAdd":-1000,
+        "type":"trap"
     },
     {
-        "x":10,
+        "x":2,
+        "y":2,
+        "scoreAdd":-1000,
+        "type":"trap"
+    },
+    {
+        "x":3,
+        "y":1,
+        "scoreAdd":-1000,
+        "type":"trap"
+    },
+    {
+        "x":1,
         "y":3,
-        "scoreAdd":1000,
-        "type":"gold"
-    },
-    {
-        "x":6,
-        "y":5,
-        "scoreAdd":-2000,
+        "scoreAdd":-1000,
         "type":"trap"
     }
 ]

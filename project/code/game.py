@@ -42,6 +42,12 @@ class Game:
         self.soundHurt = pygame.mixer.Sound(C.SOUND_HURT_PATH)  # Cargamos sonido  hurt
         self.soundCoin = pygame.mixer.Sound(C.SOUND_COIN_PATH)  # Cargamos sonido Coin
 
+    def relocateHero(self):
+        for w in range(0, C.MAP_W):
+            for j in range(0, C.MAP_H):
+                if self.mapa.mapa[j][w] == C.TILE_ENTRY:
+                    self.heroe.imgRect.x = w*C.TILE_W
+                    self.heroe.imgRect.y = j*C.TILE_H
 
     def checkIfPlayerDied(self):  # Metodo que consulta si el jugador murio
         if self.heroe.hp <= 0:
@@ -73,6 +79,7 @@ class Game:
             else:
                 self.objects.clear() #Eliminamos si quedaron objetos que no agarro el usuario
                 self.impotJsonObjects(C.OBJECT_LIST[self.mapa.actualMap]) #Cargamos nuevos objetos
+                self.relocateHero()# Reallocamos al heroe
 
     def input(self):  # Input del juego
         for event in pygame.event.get():

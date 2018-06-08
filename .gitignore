@@ -7,3 +7,9 @@ code/characters/__pycache__
 code/config/__pycache__
 code/map/__pycache__
 code/objects/__pycache__
+resources/Sprites.tsx
+resources/tiled_maps.tmx
+resources/Sprites.ase
+resources/Sprites.png
+resources/goblin.png
+resources/batch_one_0.png
