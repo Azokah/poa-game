@@ -58,3 +58,4 @@ WINNING_SURFACE = 'resources/WinningScreen.png'
 HEART_1_SURFACE = 'resources/Corazon1.png'
 HEART_2_SURFACE = 'resources/Corazon2.png'
 HEART_3_SURFACE = 'resources/Corazon3.png'
+DESIRED_FPS = 60
