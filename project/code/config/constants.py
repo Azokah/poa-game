@@ -55,3 +55,6 @@ OBJECT_TRAP_PATH = 'resources/soupdungeon_2x/crystal_wall_lightred_2x.png'
 ANIMATION_TICKRATE = 150
 LOSING_SURFACE = 'resources/losingScreen.png'
 WINNING_SURFACE = 'resources/WinningScreen.png'
+HEART_1_SURFACE = 'resources/Corazon1.png'
+HEART_2_SURFACE = 'resources/Corazon2.png'
+HEART_3_SURFACE = 'resources/Corazon3.png'

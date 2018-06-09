@@ -32,15 +32,21 @@ class Game:
         self.screen = pygame.display.set_mode(C.SIZE)
         self.font = pygame.font.SysFont(C.FONT_TYPE, C.FONT_SIZE)
         self.mapa = Mapa()  # Inicializamos mapa
+        self.impotJsonObjects(C.OBJECT_LIST[self.mapa.actualMap])  # Cargamos los objetos del mapa
         self.heroe = Heroe()  # Instanciamos al heroe
         self.finish = False  # Variable que indica si el juego no ha terminado
+
+        #De aca para abajo es todo HUD y GUI
         self.score = C.MAX_SCORE  # Puntaje
         self.scoreTick = pygame.time.get_ticks()  # Reloj del puntaje
         self.scoreSurface = self.font.render("Score: " + str(self.score), False,
                                              (255, 255, 255))  # Surface del texto para graficar puntaje
-        self.impotJsonObjects(C.OBJECT_LIST[self.mapa.actualMap])  # Cargamos los objetos del mapa
         self.soundHurt = pygame.mixer.Sound(C.SOUND_HURT_PATH)  # Cargamos sonido  hurt
         self.soundCoin = pygame.mixer.Sound(C.SOUND_COIN_PATH)  # Cargamos sonido Coin
+        self.heartGuiImg = []
+        self.heartGuiImg.append(pygame.image.load(C.HEART_1_SURFACE))
+        self.heartGuiImg.append(pygame.image.load(C.HEART_2_SURFACE))
+        self.heartGuiImg.append(pygame.image.load(C.HEART_3_SURFACE))
 
     def relocateHero(self):
         for w in range(0, C.MAP_W):
@@ -122,6 +128,8 @@ class Game:
         self.screen.blit(self.heroe.img, self.heroe.imgRect)
 
         # Graficamos GUI
+        self.screen.blit(self.heartGuiImg[self.heroe.hp-1],
+                        (C.SCREEN_W - C.SCORE_TEXT_OFFSET - self.heartGuiImg[self.heroe.hp-1].get_rect().width, C.FONT_SIZE*4))
         self.screen.blit(self.scoreSurface,
                          (C.SCREEN_W - C.SCORE_TEXT_OFFSET - self.scoreSurface.get_rect().width, C.FONT_SIZE))
         pygame.display.flip()  # Mostramos

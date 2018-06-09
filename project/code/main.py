@@ -13,11 +13,11 @@ game = Game()  # Declaramos nuestro Game
 
 # El game loop simple
 while game.finish == False:
-    # Update de todas las entidades
-    game.update()
-
     # Input
     game.input()
+
+    # Update de todas las entidades
+    game.update()
 
     # Dibujamos
     game.draw()
