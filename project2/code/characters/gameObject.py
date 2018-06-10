@@ -20,3 +20,8 @@ class GameObject():
         self.phisics.update(self.sprite,mapa)
         self.stats.update(self.phisics)
         self.anim.update(self.stats,self.sprite)
+
+
+class mapObject():
+    def __init__(self):
+        self.mapa = Mapa()

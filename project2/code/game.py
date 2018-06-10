@@ -3,11 +3,10 @@ import sys
 
 import pygame  # Para el sistema
 from config import constants as C
-from map.map import Mapa
 from objects.gold import Gold
 from objects.trap import Trap
 
-from characters.gameObject import GameObject
+from characters.gameObject import GameObject, mapObject
 
 
 class Game:
@@ -31,7 +30,7 @@ class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode(C.SIZE)
         self.font = pygame.font.SysFont(C.FONT_TYPE, C.FONT_SIZE)
-        self.mapa = Mapa()  # Inicializamos mapa
+        self.mapa = mapObject().mapa  # Inicializamos mapa
         self.impotJsonObjects(C.OBJECT_LIST[self.mapa.actualMap])  # Cargamos los objetos del mapa
         self.heroe = GameObject()  # Instanciamos al heroe
         self.finish = False  # Variable que indica si el juego no ha terminado
