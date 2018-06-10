@@ -4,7 +4,7 @@ import pygame
 from config import constants as C
 
 
-# Creamos el mapa
+# Creamos el mapa (Ahora esto deberia ser un gameObject, pero ya fue)
 class Mapa:
     def __init__(self):
         self.mapaList = []
@@ -40,3 +40,10 @@ class Mapa:
         elif self.mapa[Y][XX] == C.TILE_WALL:
             return False
         return True
+
+    def draw(self,screen):
+        for w in range(0, C.MAP_W):
+            for j in range(0, C.MAP_H):
+                self.imgRect[self.mapa[j][w]].x = w * C.TILE_W
+                self.imgRect[self.mapa[j][w]].y = j * C.TILE_H
+                screen.blit(self.img[self.mapa[j][w]], self.imgRect[self.mapa[j][w]])

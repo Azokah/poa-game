@@ -11,3 +11,6 @@ class Object(pygame.sprite.Sprite):
         self.imgRect.x = 1 * C.TILE_W
         self.imgRect.y = 0 * C.TILE_H
         self.scoreAdd = 0
+
+    def draw(self,screen):
+        screen.blit(self.img, self.imgRect)
