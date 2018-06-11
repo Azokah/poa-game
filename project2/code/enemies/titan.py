@@ -1,12 +1,10 @@
 import pygame  # Para el sistema
-from enemies.enemy import Enemy
-from enemies.bullet import Bullet
-
 from config import constants as C
+from enemies.enemy import Enemy
 
 
 class Titan(Enemy):
-    def __init__(self, X, Y, SCORE, MAP, HERO):
+    def __init__(self, X, Y, SCORE, MAP, HERO, BULLETS_POOL):
         self.x = X
         self.y = Y
         self.scoreAdd = SCORE
@@ -20,6 +18,7 @@ class Titan(Enemy):
         self.timer = C.BULLET_SPAWN_TIME
         self.hero = HERO
         self.soundHurt = pygame.mixer.Sound(C.SOUND_HURT_PATH)
+        self.bulletsPool = BULLETS_POOL
 
 
     def objectsToDraw(self):
@@ -28,8 +27,12 @@ class Titan(Enemy):
     def createBullet(self):
         if self.timer == C.BULLET_SPAWN_TIME:
             if len(self.bullets) < C.BULLETS_AMOUNT:
-                bullet = Bullet(self.x + 1, self.y)
-                self.bullets.append(bullet)
+                bullet = self.bulletsPool.getBullet()
+                if bullet is not None:
+                    bullet.setPosition(self.x + 1, self.y)
+                    self.bullets.append(bullet)
+                else:
+                    return
 
         updatedBullets = []
         for b in self.bullets:
@@ -40,9 +43,11 @@ class Titan(Enemy):
 
             if not mapCollision and not heroCollision:
                 updatedBullets.append(b)
+            else:
+                self.bulletsPool.freeBullet(b.id)
 
             if heroCollision:
-                self.hero.damage()
+                self.hero.stats.damage()
                 self.soundHurt.play()
 
             self.bullets = updatedBullets

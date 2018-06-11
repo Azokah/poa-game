@@ -8,6 +8,7 @@ from objects.trap import Trap
 
 from characters.gameObject import GameObject, mapObject
 
+from enemies.bulletsPool import BulletsPool
 from enemies.titan import Titan
 
 
@@ -39,13 +40,14 @@ class Game:
             x = int(g["x"])
             y = int(g["y"])
             score = int(g["scoreAdd"])
-            self.enemies.append(Titan(x, y, score, self.mapa, self.heroe))
+            self.enemies.append(Titan(x, y, score, self.mapa, self.heroe, self.bulletsPool))
 
     def __init__(self):
         self.screen = pygame.display.set_mode(C.SIZE)
         self.font = pygame.font.SysFont(C.FONT_TYPE, C.FONT_SIZE)
         self.mapa = mapObject().mapa  # Inicializamos mapa
         self.heroe = GameObject()  # Instanciamos al heroe
+        self.bulletsPool = BulletsPool()
         self.importJson(C.OBJECT_LIST[self.mapa.actualMap])  # Cargamos los objetos del mapa
         self.finish = False  # Variable que indica si el juego no ha terminado
 
