@@ -8,32 +8,47 @@ from objects.gold import Gold
 from objects.trap import Trap
 
 from characters.hero import Heroe
-
+from enemies.titan import Titan
 
 class Game:
-    def impotJsonObjects(self, path):
+
+    def importJson(self, path):
         self.objects = []
+        self.enemies = []
+
         with open(path) as f:
             data = json.load(f)
 
         for g in data:
-            if g["type"] == "gold":
-                x = int(g["x"])
-                y = int(g["y"])
-                score = int(g["scoreAdd"])
-                self.objects.append(Gold(x, y, score))
-            if g["type"] == "trap":
-                x = int(g["x"])
-                y = int(g["y"])
-                score = int(g["scoreAdd"])
-                self.objects.append(Trap(x, y, score))
+            self.importJsonObjects(g)  # Cargamos los objetos del mapa
+            self.importJsonEnemies(g)  # Cargamos los enemigos del mapa
+
+    def importJsonObjects(self, g):
+        if g["type"] == "gold":
+            x = int(g["x"])
+            y = int(g["y"])
+            score = int(g["scoreAdd"])
+            self.objects.append(Gold(x, y, score))
+        if g["type"] == "trap":
+            x = int(g["x"])
+            y = int(g["y"])
+            score = int(g["scoreAdd"])
+            self.objects.append(Trap(x, y, score))
+
+    def importJsonEnemies(self, g):
+        if g["type"] == "titan":
+            x = int(g["x"])
+            y = int(g["y"])
+            score = int(g["scoreAdd"])
+            self.enemies.append(Titan(x, y, score, self.mapa, self.heroe))
 
     def __init__(self):
         self.screen = pygame.display.set_mode(C.SIZE)
         self.font = pygame.font.SysFont(C.FONT_TYPE, C.FONT_SIZE)
         self.mapa = Mapa()  # Inicializamos mapa
-        self.impotJsonObjects(C.OBJECT_LIST[self.mapa.actualMap])  # Cargamos los objetos del mapa
-        self.heroe = Heroe()  # Instanciamos al heroe
+        self.heroe = Heroe()  # Instanciamos al heroe. Necesito cargarlo antes del json
+        self.importJson(C.OBJECT_LIST[self.mapa.actualMap])
+
         self.finish = False  # Variable que indica si el juego no ha terminado
 
         #Para control de FPS
@@ -94,6 +109,16 @@ class Game:
                     self.soundCoin.play()
                 self.objects.remove(o)
 
+        for o in self.enemies:
+            if o.imgRect.colliderect(self.heroe.imgRect):
+                self.score += o.scoreAdd
+                if o.scoreAdd < 0:
+                    self.heroe.damage()
+                    self.soundHurt.play()
+                else:
+                    self.soundCoin.play()
+                self.enemies.remove(o)
+
     def checkWinCondition(self):  # Metodo que consulta si el jugador se paró en la ultima casilla
         y = int(self.heroe.imgRect.center[1] / C.TILE_H)
         x = int(self.heroe.imgRect.center[0] / C.TILE_W)
@@ -103,7 +128,8 @@ class Game:
                 print("Felicidades, ganaste!. Score: " + str(self.score))
             else:
                 self.objects.clear() #Eliminamos si quedaron objetos que no agarro el usuario
-                self.impotJsonObjects(C.OBJECT_LIST[self.mapa.actualMap]) #Cargamos nuevos objetos
+                self.enemies.clear() #Eliminamos los enemigos
+                self.importJson(C.OBJECT_LIST[self.mapa.actualMap]) #Cargamos nuevos objetos
                 self.relocateHero()# Reallocamos al heroe
 
     def input(self):  # Input del juego
@@ -143,6 +169,12 @@ class Game:
         for o in self.objects:
             self.screen.blit(o.img, o.imgRect)
 
+        # Graficamos enemigos
+        for o in self.enemies:
+            self.screen.blit(o.img, o.imgRect)
+            for i in o.objectsToDraw():
+                self.screen.blit(i.img, i.imgRect)
+
         # Graficamos al heroe
         self.screen.blit(self.heroe.img, self.heroe.imgRect)
 
@@ -153,7 +185,7 @@ class Game:
                          (C.SCREEN_W - C.SCORE_TEXT_OFFSET - self.scoreSurface.get_rect().width, C.FONT_SIZE))
         self.screen.blit(self.fpsSurface,
                          (C.SCREEN_W - C.SCORE_TEXT_OFFSET - self.fpsSurface.get_rect().width, C.FONT_SIZE*6))
-        pygame.display.flip()  # Mostramos
+
 
     def updateScore(self):  # Metodo para actualizar el score
         if self.scoreTick + C.SCORE_TICK < pygame.time.get_ticks():
@@ -165,6 +197,9 @@ class Game:
         self.checkFPS()
         self.checkWinCondition()
         self.heroe.update(self.mapa)
+        for e in self.enemies:
+            e.update()
         self.updateScore()
         self.checkPickObjects()
         self.checkIfPlayerDied()
+        pygame.display.flip()  # Mostramos
