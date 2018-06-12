@@ -14,5 +14,5 @@ class Gold(Object):
         self.imgRect.y = Y * C.TILE_H
 
         self.flyweight = self.objectsFlyweight.getFlyweight('gold')
-        print(self.flyweight)
+        #print(self.flyweight)
         self.scoreAdd = self.flyweight.score

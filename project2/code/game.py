@@ -12,6 +12,8 @@ from characters.gameObject import GameObject, mapObject
 from enemies.bulletsPool import BulletsPool
 from enemies.titan import Titan
 
+from input.inputManager import InputManager
+
 
 class Game:
     def importJson(self, path):
@@ -50,6 +52,7 @@ class Game:
         self.bulletsPool = BulletsPool()
         self.objectsFlyweights = ObjectsFlyweight()
         self.importJson(C.OBJECT_LIST[self.mapa.actualMap])  # Cargamos los objetos del mapa
+        self.inputManager = InputManager(self.heroe)
         self.finish = False  # Variable que indica si el juego no ha terminado
 
         #De aca para abajo es todo HUD y GUI deberia tener su propia clase pero ya fue
@@ -139,24 +142,24 @@ class Game:
             if event.type == pygame.QUIT: sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    sys.exit()
+                    self.inputManager.command('ESC').execute()
                 if event.key == pygame.K_UP:
-                    self.heroe.phisics.walkUp()
+                    self.inputManager.command('UP').execute()
                 if event.key == pygame.K_DOWN:
-                    self.heroe.phisics.walkDown()
+                    self.inputManager.command('DOWN').execute()
                 if event.key == pygame.K_LEFT:
-                    self.heroe.phisics.walkLeft()
+                    self.inputManager.command('LEFT').execute()
                 if event.key == pygame.K_RIGHT:
-                    self.heroe.phisics.walkRight()
+                    self.inputManager.command('RIGHT').execute()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
-                    self.heroe.phisics.stopUp()
+                    self.inputManager.command('UP').stop()
                 if event.key == pygame.K_DOWN:
-                    self.heroe.phisics.stopDown()
+                    self.inputManager.command('DOWN').stop()
                 if event.key == pygame.K_LEFT:
-                    self.heroe.phisics.stopLeft()
+                    self.inputManager.command('LEFT').stop()
                 if event.key == pygame.K_RIGHT:
-                    self.heroe.phisics.stopRight()
+                    self.inputManager.command('RIGHT').stop()
 
     def draw(self):
         self.screen.fill(C.BACKGROUND_COLOR)  # Pintamos pantalla de negro

@@ -14,5 +14,5 @@ class Trap(Object):
         self.imgRect.y = Y * C.TILE_H
 
         self.flyweight = self.objectsFlyweight.getFlyweight('trap')
-        print(self.flyweight)
+        #print(self.flyweight)
         self.scoreAdd = self.flyweight.score
