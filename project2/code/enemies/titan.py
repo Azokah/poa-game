@@ -4,7 +4,7 @@ from enemies.enemy import Enemy
 
 
 class Titan(Enemy):
-    def __init__(self, X, Y, SCORE, MAP, HERO, BULLETS_POOL):
+    def __init__(self, X, Y, SCORE, MAP, HERO, BULLETS_AMOUNT, BULLETS_POOL):
         self.x = X
         self.y = Y
         self.scoreAdd = SCORE
@@ -19,6 +19,7 @@ class Titan(Enemy):
         self.hero = HERO
         self.soundHurt = pygame.mixer.Sound(C.SOUND_HURT_PATH)
         self.bulletsPool = BULLETS_POOL
+        self.bulletsAmount = BULLETS_AMOUNT
 
 
     def objectsToDraw(self):
@@ -26,7 +27,7 @@ class Titan(Enemy):
 
     def createBullet(self):
         if self.timer == C.BULLET_SPAWN_TIME:
-            if len(self.bullets) < C.BULLETS_AMOUNT:
+            if len(self.bullets) < self.bulletsAmount:
                 bullet = self.bulletsPool.getBullet()
                 if bullet is not None:
                     bullet.setPosition(self.x + 1, self.y)
@@ -74,3 +75,7 @@ class Titan(Enemy):
         if self.timer == C.BULLET_SPAWN_TIME:
             self.timer = 0
         self.timer += 1
+
+    def clear(self):
+        for b in self.bullets:
+            self.bulletsPool.freeBullet(b.id)

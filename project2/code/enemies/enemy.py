@@ -14,3 +14,6 @@ class Enemy(pygame.sprite.Sprite):
 
     def update(self):
         pass
+
+    def clear(self):
+        pass

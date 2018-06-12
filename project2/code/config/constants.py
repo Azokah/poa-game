@@ -1,4 +1,4 @@
-#Constantes
+# Constantes
 SIZE = SCREEN_W, SCREEN_H = 1024, 768
 SPEED = [2, 2]
 FONT_SIZE = 30
@@ -17,7 +17,7 @@ OBJECTS2_PATH = 'resources/level2-objects.json'
 OBJECTS3_PATH = 'resources/level3-objects.json'
 OBJECTS4_PATH = 'resources/level4-objects.json'
 OBJECTS5_PATH = 'resources/level5-objects.json'
-OBJECT_LIST = [OBJECTS1_PATH,OBJECTS2_PATH,OBJECTS3_PATH,OBJECTS4_PATH,OBJECTS5_PATH]
+OBJECT_LIST = [OBJECTS1_PATH, OBJECTS2_PATH, OBJECTS3_PATH, OBJECTS4_PATH, OBJECTS5_PATH]
 TILE_FLOOR1_PATH = 'resources/floor1.png'
 TILE_WALL_PATH = 'resources/wall.png'
 TILE_FLOOR2_PATH = 'resources/floor2.png'
@@ -42,10 +42,10 @@ HERO_COLISION_OFFSET = 12
 HERO_SIZE_W = 32
 HERO_SIZE_H = 32
 MAX_SCORE = 1000
-SCORE_TICK = 250 #Milisegundos en los que tarda en bajar 1 punto de score
+SCORE_TICK = 250  # Milisegundos en los que tarda en bajar 1 punto de score
 SCORE_TEXT_OFFSET = 16
 HURT_ANIMATION_TICKRATE = 1000
-#Enum de estados de heroe
+# Enum de estados de heroe
 HERO_IDLE = 0
 HERO_RUN = 1
 HERO_HURT = 2
@@ -60,9 +60,10 @@ HEART_2_SURFACE = 'resources/Corazon2.png'
 HEART_3_SURFACE = 'resources/Corazon3.png'
 DESIRED_FPS = 60
 BULLET_IMAGE = 'resources/bullet.png'
-BULLET_MOVE_X = 3
-BULLET_SPAWN_TIME = 25
-BULLETS_AMOUNT = 3 #Bullets que dispara el titan
+BULLET_MOVE_X = 5
+BULLET_SPAWN_TIME = 15
 BULLET_COLLISION_OFFSET = 64
 BULLET_POOL_SIZE = 3
 ENEMY_1_IMAGE = 'resources/soupdungeon_2x/titan_2x.png'
+GOLD_SCORE = 1000
+TRAP_SCORE = -2000

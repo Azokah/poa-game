@@ -5,6 +5,7 @@ import pygame  # Para el sistema
 from config import constants as C
 from objects.gold import Gold
 from objects.trap import Trap
+from objects.objectsFlyweight import ObjectsFlyweight
 
 from characters.gameObject import GameObject, mapObject
 
@@ -27,20 +28,19 @@ class Game:
         if g["type"] == "gold":
             x = int(g["x"])
             y = int(g["y"])
-            score = int(g["scoreAdd"])
-            self.objects.append(Gold(x, y, score))
+            self.objects.append(Gold(x, y, self.objectsFlyweights))
         if g["type"] == "trap":
             x = int(g["x"])
             y = int(g["y"])
-            score = int(g["scoreAdd"])
-            self.objects.append(Trap(x, y, score))
+            self.objects.append(Trap(x, y, self.objectsFlyweights))
 
     def importJsonEnemies(self, g):
         if g["type"] == "titan":
             x = int(g["x"])
             y = int(g["y"])
             score = int(g["scoreAdd"])
-            self.enemies.append(Titan(x, y, score, self.mapa, self.heroe, self.bulletsPool))
+            bullets = int(g["bullets"])
+            self.enemies.append(Titan(x, y, score, self.mapa, self.heroe, bullets, self.bulletsPool))
 
     def __init__(self):
         self.screen = pygame.display.set_mode(C.SIZE)
@@ -48,6 +48,7 @@ class Game:
         self.mapa = mapObject().mapa  # Inicializamos mapa
         self.heroe = GameObject()  # Instanciamos al heroe
         self.bulletsPool = BulletsPool()
+        self.objectsFlyweights = ObjectsFlyweight()
         self.importJson(C.OBJECT_LIST[self.mapa.actualMap])  # Cargamos los objetos del mapa
         self.finish = False  # Variable que indica si el juego no ha terminado
 
@@ -127,6 +128,8 @@ class Game:
                 print("Felicidades, ganaste!. Score: " + str(self.score))
             else:
                 self.objects.clear() #Eliminamos si quedaron objetos que no agarro el usuario
+                for e in self.enemies:
+                    e.clear()
                 self.enemies.clear() #Eliminamos los enemigos
                 self.importJson(C.OBJECT_LIST[self.mapa.actualMap]) #Cargamos nuevos objetos
                 self.relocateHero()# Reallocamos al heroe

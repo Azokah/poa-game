@@ -2,31 +2,33 @@
     {
         "x":1,
         "y":10,
-        "scoreAdd":1000,
         "type":"gold"
     },
     {
         "x":4,
         "y":10,
-        "scoreAdd":1000,
         "type":"gold"
     },
     {
         "x":1,
         "y":7,
-        "scoreAdd":1000,
         "type":"gold"
     },
     {
         "x":10,
         "y":5,
-        "scoreAdd":2000,
         "type":"gold"
     },
     {
         "x":9,
         "y":5,
-        "scoreAdd":-3000,
         "type":"trap"
+    },
+    {
+        "x":1,
+        "y":9,
+        "scoreAdd":1000,
+        "bullets":1,
+        "type":"titan"
     }
 ]

@@ -2,55 +2,46 @@
     {
         "x":10,
         "y":10,
-        "scoreAdd":1000,
         "type":"gold"
     },
     {
         "x":10,
         "y":1,
-        "scoreAdd":1000,
         "type":"gold"
     },
     {
         "x":3,
         "y":2,
-        "scoreAdd":1000,
         "type":"gold"
     },
     {
         "x":7,
         "y":2,
-        "scoreAdd":1000,
         "type":"gold"
     },
     {
         "x":7,
         "y":4,
-        "scoreAdd":10000,
         "type":"gold"
     },
     {
         "x":6,
         "y":7,
-        "scoreAdd":-2000,
         "type":"trap"
     },
     {
         "x":8,
         "y":5,
-        "scoreAdd":-2000,
         "type":"trap"
     },
     {
         "x":2,
         "y":7,
-        "scoreAdd":-2000,
         "type":"trap"
     },
     {
         "x":5,
         "y":1,
-        "scoreAdd":-2000,
         "type":"trap"
     }
 ]
