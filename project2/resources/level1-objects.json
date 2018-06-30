@@ -1,0 +1,29 @@
+[
+    {
+        "x":2,
+        "y":10,
+        "type":"gold"
+    },
+    {
+        "x":10,
+        "y":10,
+        "type":"gold"
+    },
+    {
+        "x":10,
+        "y":3,
+        "type":"gold"
+    },
+    {
+        "x":6,
+        "y":5,
+        "type":"trap"
+    },
+    {
+        "x":1,
+        "y":8,
+        "scoreAdd":1000,
+        "bullets":3,
+        "type":"titan"
+    }
+]
